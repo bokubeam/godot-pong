@@ -37,22 +37,27 @@ color = Color(0.193992, 0.321258, 0.510972, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
 layout_mode = 1
-offset_left = 427.0
-offset_right = 1501.0
+offset_right = 1920.0
 offset_bottom = 166.0
 
-[node name="Player1Score" type="Label" parent="UI/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "0"
-vertical_alignment = 1
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_right = 400
 
-[node name="Player2Score" type="Label" parent="UI/HBoxContainer"]
+[node name="Player2Score" type="Label" parent="UI/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 80
 text = "0"
 horizontal_alignment = 2
+
+[node name="Player1Score" type="Label" parent="UI/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "0"
+vertical_alignment = 1
 
 [node name="Paddle" type="CharacterBody2D" parent="."]
 position = Vector2(80, 325)
