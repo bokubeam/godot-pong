@@ -1,17 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwv17nowcoayb"]
+[gd_scene load_steps=3 format=3 uid="uid://bwv17nowcoayb"]
+
+[ext_resource type="Script" path="res://paddle.gd" id="1_tptul"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ll46o"]
 size = Vector2(10, 100)
 
 [node name="Level" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Paddle" type="CharacterBody2D" parent="."]
 position = Vector2(20, 325)
+script = ExtResource("1_tptul")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="PaddleCollision" type="CollisionShape2D" parent="Paddle"]
 shape = SubResource("RectangleShape2D_ll46o")
 
-[node name="ColorRect" type="ColorRect" parent="CharacterBody2D"]
+[node name="PaddleColor" type="ColorRect" parent="Paddle"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -23,4 +26,5 @@ offset_right = 5.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.2336, 0.73, 0.73, 1)
 metadata/_edit_use_anchors_ = true
