@@ -1,11 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwv17nowcoayb"]
+[gd_scene load_steps=7 format=3 uid="uid://bwv17nowcoayb"]
 
 [ext_resource type="Script" path="res://paddle.gd" id="1_tptul"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ll46o"]
 size = Vector2(20, 200)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xbuw"]
+size = Vector2(2482, 223)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m8820"]
+size = Vector2(2564.5, 322.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnkwo"]
+size = Vector2(324, 1085)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nyshk"]
+size = Vector2(288, 1191)
+
 [node name="Level" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="PlayArea" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.193992, 0.321258, 0.510972, 1)
 
 [node name="Paddle" type="CharacterBody2D" parent="."]
 position = Vector2(40, 325)
@@ -28,3 +48,27 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.2336, 0.73, 0.73, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(948, -111.5)
+shape = SubResource("RectangleShape2D_6xbuw")
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+position = Vector2(933, 1241)
+shape = SubResource("RectangleShape2D_m8820")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(-162, 538.5)
+shape = SubResource("RectangleShape2D_dnkwo")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(2064, 590)
+shape = SubResource("RectangleShape2D_nyshk")
