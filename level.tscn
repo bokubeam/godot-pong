@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwv17nowcoayb"]
+[gd_scene load_steps=8 format=3 uid="uid://bwv17nowcoayb"]
 
 [ext_resource type="Script" path="res://paddle.gd" id="1_tptul"]
 
@@ -16,6 +16,9 @@ size = Vector2(324, 1085)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyshk"]
 size = Vector2(288, 1191)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6lls4"]
+radius = 16.0
 
 [node name="Level" type="Node2D"]
 
@@ -81,26 +84,39 @@ grow_vertical = 2
 color = Color(0.2336, 0.73, 0.73, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="TopWall" type="StaticBody2D" parent="."]
+[node name="Walls" type="Node2D" parent="."]
+visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
-position = Vector2(948, -111.5)
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+position = Vector2(968, -112)
 shape = SubResource("RectangleShape2D_6xbuw")
 
-[node name="BottomWall" type="StaticBody2D" parent="."]
+[node name="BottomWall" type="StaticBody2D" parent="Walls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
 position = Vector2(933, 1241)
 shape = SubResource("RectangleShape2D_m8820")
 
-[node name="LeftWall" type="StaticBody2D" parent="."]
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
 position = Vector2(-162, 538.5)
 shape = SubResource("RectangleShape2D_dnkwo")
 
-[node name="RightWall" type="StaticBody2D" parent="."]
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
 position = Vector2(2064, 590)
 shape = SubResource("RectangleShape2D_nyshk")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Ball"]
+scale = Vector2(1, 0.667)
+color = Color(0.2604, 0.84, 0.53088, 1)
+polygon = PackedVector2Array(8, -23.988, -8, -23.988, -16, -11.994, -16, 11.994, -8, 23.988, 8, 23.988, 16, 11.994, 16, -11.994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_6lls4")
