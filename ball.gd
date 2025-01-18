@@ -4,9 +4,9 @@ signal player_1_scored
 signal player_2_scored
 
 var startpos: Vector2
-var speed_vel: Vector2 = Vector2(0, 0)
 var ball_speed = 20.0
 var random_angle
+const SPEED_INCREASE_RATIO = 1.001
 
 func _ready()->void:
 	var x = 180 if randi() % 2 == 0 else 0
@@ -14,15 +14,15 @@ func _ready()->void:
 
 func ready_ball(angle: float):
 	position =  $"../Camera2D".get_screen_center_position()
-	speed_vel = Vector2.ZERO
+	velocity = Vector2.ZERO
 	await get_tree().create_timer(0.2).timeout
-	speed_vel = Vector2.from_angle(deg_to_rad(angle)) * ball_speed
+	velocity = Vector2.from_angle(deg_to_rad(angle)) * ball_speed
 	
 func _physics_process(delta: float) -> void:
-	velocity = speed_vel
-	var collision_info = move_and_collide(speed_vel)
+	velocity = velocity * SPEED_INCREASE_RATIO
+	var collision_info = move_and_collide(velocity)
 	if collision_info: 
-		speed_vel = speed_vel.bounce(collision_info.get_normal())
+		velocity = velocity.bounce(collision_info.get_normal())
 
 # Collision layers and masks need to be set for all
 # collision objects.
