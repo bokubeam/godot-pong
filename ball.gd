@@ -6,16 +6,17 @@ signal player_2_scored
 var startpos: Vector2
 var speed_vel: Vector2 = Vector2(0, 0)
 var ball_speed = 20.0
+var random_angle
 
 func _ready()->void:
-	ready_ball()
+	var x = 180 if randi() % 2 == 0 else 0
+	ready_ball(randf_range(315, 405) - x)
 
-func ready_ball():
+func ready_ball(angle: float):
 	position =  $"../Camera2D".get_screen_center_position()
 	speed_vel = Vector2.ZERO
 	await get_tree().create_timer(0.2).timeout
-	var random_angle = randf_range(315, 405)
-	speed_vel = Vector2.from_angle(deg_to_rad(random_angle)) * ball_speed
+	speed_vel = Vector2.from_angle(deg_to_rad(angle)) * ball_speed
 	
 func _physics_process(delta: float) -> void:
 	velocity = speed_vel
@@ -30,8 +31,8 @@ func _physics_process(delta: float) -> void:
 # collide with.
 func _on_left_wall_body_entered(body: Node2D) -> void:
 	player_2_scored.emit()
-	ready_ball()
+	ready_ball(randf_range(315, 405))
 
 func _on_right_wall_body_entered(body: Node2D) -> void:
 	player_1_scored.emit()
-	ready_ball()
+	ready_ball(randf_range(135, 225))
