@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bwv17nowcoayb"]
+[gd_scene load_steps=11 format=3 uid="uid://bwv17nowcoayb"]
 
 [ext_resource type="Script" path="res://player_2_score.gd" id="1_5nsb5"]
 [ext_resource type="Script" path="res://paddle.gd" id="1_tptul"]
 [ext_resource type="Script" path="res://ball.gd" id="2_up5ej"]
+[ext_resource type="Script" path="res://player_1_score.gd" id="2_vphdt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ll46o"]
 size = Vector2(20, 200)
@@ -65,6 +66,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 80
 text = "0"
 vertical_alignment = 1
+script = ExtResource("2_vphdt")
 
 [node name="Paddle" type="CharacterBody2D" parent="."]
 position = Vector2(80, 325)
@@ -138,4 +140,5 @@ shape = SubResource("CircleShape2D_6lls4")
 
 [connection signal="body_entered" from="Walls/LeftGoal" to="Ball" method="_on_left_wall_body_entered"]
 [connection signal="body_entered" from="Walls/RightGoal" to="Ball" method="_on_right_wall_body_entered"]
+[connection signal="player_1_scored" from="Ball" to="UI/HBoxContainer/MarginContainer/Player1Score" method="_on_ball_player_1_scored"]
 [connection signal="player_2_scored" from="Ball" to="UI/HBoxContainer/MarginContainer/Player2Score" method="_on_ball_player_2_scored"]
