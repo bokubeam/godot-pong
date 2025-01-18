@@ -25,11 +25,9 @@ func _physics_process(delta: float) -> void:
 # defined on. Collision masks define what the object can
 # collide with.
 func _on_left_wall_body_entered(body: Node2D) -> void:
-	print(body)
 	player_2_scored.emit()
 	ready_ball()
 
 func _on_right_wall_body_entered(body: Node2D) -> void:
-	print(body)
 	player_1_scored.emit()
 	ready_ball()
