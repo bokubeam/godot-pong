@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwv17nowcoayb"]
+[gd_scene load_steps=10 format=3 uid="uid://bwv17nowcoayb"]
 
+[ext_resource type="Script" path="res://player_2_score.gd" id="1_5nsb5"]
 [ext_resource type="Script" path="res://paddle.gd" id="1_tptul"]
 [ext_resource type="Script" path="res://ball.gd" id="2_up5ej"]
 
@@ -33,6 +34,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PlayArea" type="ColorRect" parent="UI"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 167.0
 offset_right = 1900.0
@@ -56,6 +58,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 80
 text = "0"
 horizontal_alignment = 2
+script = ExtResource("1_5nsb5")
 
 [node name="Player1Score" type="Label" parent="UI/HBoxContainer/MarginContainer"]
 layout_mode = 2
@@ -65,6 +68,8 @@ vertical_alignment = 1
 
 [node name="Paddle" type="CharacterBody2D" parent="."]
 position = Vector2(80, 325)
+collision_layer = 4
+collision_mask = 10
 script = ExtResource("1_tptul")
 
 [node name="PaddleCollision" type="CollisionShape2D" parent="Paddle"]
@@ -88,31 +93,39 @@ metadata/_edit_use_anchors_ = true
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="TopWall" type="StaticBody2D" parent="Walls"]
+collision_layer = 2
+collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
-position = Vector2(968, -112)
+position = Vector2(951, 55)
 shape = SubResource("RectangleShape2D_6xbuw")
 
 [node name="BottomWall" type="StaticBody2D" parent="Walls"]
+collision_layer = 2
+collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
-position = Vector2(933, 1241)
+position = Vector2(934, 1220)
 shape = SubResource("RectangleShape2D_m8820")
 
-[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+[node name="LeftGoal" type="Area2D" parent="Walls"]
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
-position = Vector2(-162, 538.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftGoal"]
+position = Vector2(-142, 535)
 shape = SubResource("RectangleShape2D_dnkwo")
 
-[node name="RightWall" type="StaticBody2D" parent="Walls"]
+[node name="RightGoal" type="Area2D" parent="Walls"]
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
-position = Vector2(2064, 590)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightGoal"]
+position = Vector2(2045, 593)
 shape = SubResource("RectangleShape2D_nyshk")
 
 [node name="Ball" type="CharacterBody2D" parent="."]
 position = Vector2(955, 616)
+collision_layer = 8
+collision_mask = 15
 script = ExtResource("2_up5ej")
 
 [node name="Polygon2D" type="Polygon2D" parent="Ball"]
@@ -122,3 +135,7 @@ polygon = PackedVector2Array(8, -23.988, -8, -23.988, -16, -11.994, -16, 11.994,
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 shape = SubResource("CircleShape2D_6lls4")
+
+[connection signal="body_entered" from="Walls/LeftGoal" to="Ball" method="_on_left_wall_body_entered"]
+[connection signal="body_entered" from="Walls/RightGoal" to="Ball" method="_on_right_wall_body_entered"]
+[connection signal="player_2_scored" from="Ball" to="UI/HBoxContainer/MarginContainer/Player2Score" method="_on_ball_player_2_scored"]
