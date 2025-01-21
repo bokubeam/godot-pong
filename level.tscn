@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bwv17nowcoayb"]
+[gd_scene load_steps=9 format=3 uid="uid://bwv17nowcoayb"]
 
 [ext_resource type="Script" path="res://player_2_score.gd" id="1_5nsb5"]
-[ext_resource type="Script" path="res://ball.gd" id="2_up5ej"]
 [ext_resource type="Script" path="res://player_1_score.gd" id="2_vphdt"]
 [ext_resource type="PackedScene" uid="uid://cdqkvykyskkv7" path="res://paddle.tscn" id="3_8bj6e"]
+[ext_resource type="PackedScene" uid="uid://hbv3utnip1tw" path="res://duck.tscn" id="4_dj2gj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xbuw"]
 size = Vector2(2482, 223)
@@ -16,9 +16,6 @@ size = Vector2(324, 1085)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyshk"]
 size = Vector2(288, 1191)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6lls4"]
-radius = 16.0
 
 [node name="Level" type="Node2D"]
 
@@ -103,21 +100,9 @@ collision_mask = 8
 position = Vector2(2045, 593)
 shape = SubResource("RectangleShape2D_nyshk")
 
-[node name="Ball" type="CharacterBody2D" parent="."]
-position = Vector2(955, 616)
-collision_layer = 8
-collision_mask = 15
-script = ExtResource("2_up5ej")
+[node name="Duck" parent="." instance=ExtResource("4_dj2gj")]
 
-[node name="Polygon2D" type="Polygon2D" parent="Ball"]
-scale = Vector2(1, 0.667)
-color = Color(0.2604, 0.84, 0.53088, 1)
-polygon = PackedVector2Array(8, -23.988, -8, -23.988, -16, -11.994, -16, 11.994, -8, 23.988, 8, 23.988, 16, 11.994, 16, -11.994)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-shape = SubResource("CircleShape2D_6lls4")
-
-[connection signal="body_entered" from="Walls/LeftGoal" to="Ball" method="_on_left_wall_body_entered"]
-[connection signal="body_entered" from="Walls/RightGoal" to="Ball" method="_on_right_wall_body_entered"]
-[connection signal="player_1_scored" from="Ball" to="UI/HBoxContainer/MarginContainer/Player1Score" method="_on_ball_player_1_scored"]
-[connection signal="player_2_scored" from="Ball" to="UI/HBoxContainer/MarginContainer/Player2Score" method="_on_ball_player_2_scored"]
+[connection signal="body_entered" from="Walls/LeftGoal" to="Duck" method="_on_left_goal_body_entered"]
+[connection signal="body_entered" from="Walls/RightGoal" to="Duck" method="_on_right_goal_body_entered"]
+[connection signal="player_1_scored" from="Duck" to="UI/HBoxContainer/MarginContainer/Player1Score" method="_on_duck_player_1_scored"]
+[connection signal="player_2_scored" from="Duck" to="UI/HBoxContainer/MarginContainer/Player2Score" method="_on_duck_player_2_scored"]
