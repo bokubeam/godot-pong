@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://paddle.gd" id="1_mswhf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ll46o"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pybyr"]
 size = Vector2(20, 200)
 
 [node name="Paddle" type="CharacterBody2D"]
@@ -10,9 +10,6 @@ position = Vector2(80, 325)
 collision_layer = 4
 collision_mask = 10
 script = ExtResource("1_mswhf")
-
-[node name="PaddleCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ll46o")
 
 [node name="PaddleColor" type="ColorRect" parent="."]
 anchors_preset = 8
@@ -28,3 +25,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.2336, 0.73, 0.73, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="PaddleCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pybyr")
