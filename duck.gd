@@ -28,7 +28,9 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	velocity = velocity * SPEED_INCREASE_RATIO
 	var collision_info = move_and_collide(velocity)
-	if collision_info: 
+	if collision_info:
+		$Quack.pitch_scale = randf_range(0.9, 1.1)
+		$Quack.play()
 		velocity = velocity.bounce(collision_info.get_normal())
 
 # Collision layers and masks need to be set for all

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://hbv3utnip1tw"]
+[gd_scene load_steps=5 format=3 uid="uid://hbv3utnip1tw"]
 
 [ext_resource type="Script" path="res://duck.gd" id="1_esl2r"]
 [ext_resource type="Texture2D" uid="uid://c63yiopgwj3fu" path="res://assets/duck.png" id="2_teycl"]
+[ext_resource type="AudioStream" uid="uid://d2tk2mcxlfu0q" path="res://assets/quack.ogg" id="3_biof8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6lls4"]
 radius = 38.0132
@@ -19,3 +20,6 @@ texture = ExtResource("2_teycl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6lls4")
+
+[node name="Quack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_biof8")
