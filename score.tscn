@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cskad4s0hp3de"]
+
+[ext_resource type="Script" path="res://score.gd" id="1_ovaxw"]
+[ext_resource type="AudioStream" uid="uid://dhuu4pfrklon2" path="res://assets/score_point.ogg" id="2_g2swh"]
+
+[node name="Score" type="Label"]
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 80
+text = "0"
+horizontal_alignment = 2
+script = ExtResource("1_ovaxw")
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_g2swh")

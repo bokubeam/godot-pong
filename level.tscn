@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwv17nowcoayb"]
+[gd_scene load_steps=8 format=3 uid="uid://bwv17nowcoayb"]
 
-[ext_resource type="Script" path="res://player_2_score.gd" id="1_5nsb5"]
-[ext_resource type="Script" path="res://player_1_score.gd" id="2_vphdt"]
+[ext_resource type="PackedScene" uid="uid://cskad4s0hp3de" path="res://score.tscn" id="1_yps8t"]
 [ext_resource type="PackedScene" uid="uid://cdqkvykyskkv7" path="res://paddle.tscn" id="3_8bj6e"]
 [ext_resource type="PackedScene" uid="uid://hbv3utnip1tw" path="res://duck.tscn" id="4_dj2gj"]
 
@@ -47,20 +46,14 @@ size_flags_horizontal = 3
 theme_override_constants/margin_left = 400
 theme_override_constants/margin_right = 400
 
-[node name="Player2Score" type="Label" parent="UI/HBoxContainer/MarginContainer"]
+[node name="Player2Score" parent="UI/HBoxContainer/MarginContainer" instance=ExtResource("1_yps8t")]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 80
-text = "0"
-horizontal_alignment = 2
-script = ExtResource("1_5nsb5")
+size_flags_horizontal = 10
+player = 1
 
-[node name="Player1Score" type="Label" parent="UI/HBoxContainer/MarginContainer"]
+[node name="Player1Score" parent="UI/HBoxContainer/MarginContainer" instance=ExtResource("1_yps8t")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "0"
-vertical_alignment = 1
-script = ExtResource("2_vphdt")
+size_flags_horizontal = 2
 
 [node name="Paddle1" parent="." instance=ExtResource("3_8bj6e")]
 
@@ -104,5 +97,7 @@ shape = SubResource("RectangleShape2D_nyshk")
 
 [connection signal="body_entered" from="Walls/LeftGoal" to="Duck" method="_on_left_goal_body_entered"]
 [connection signal="body_entered" from="Walls/RightGoal" to="Duck" method="_on_right_goal_body_entered"]
+[connection signal="player_1_scored" from="Duck" to="UI/HBoxContainer/MarginContainer/Player2Score" method="_on_duck_player_1_scored"]
 [connection signal="player_1_scored" from="Duck" to="UI/HBoxContainer/MarginContainer/Player1Score" method="_on_duck_player_1_scored"]
 [connection signal="player_2_scored" from="Duck" to="UI/HBoxContainer/MarginContainer/Player2Score" method="_on_duck_player_2_scored"]
+[connection signal="player_2_scored" from="Duck" to="UI/HBoxContainer/MarginContainer/Player1Score" method="_on_duck_player_2_scored"]
